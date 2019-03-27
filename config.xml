@@ -2,8 +2,8 @@
 <widget xmlns   = "http://www.w3.org/ns/widgets"
     xmlns:gap   = "http://phonegap.com/ns/1.0"
     id          = "alurosu.games.activ8"
-    versionCode = "50"
-    version     = "2.1.0" >
+    versionCode = "100"
+    version     = "2.1.1" >
 
 	<name>Activ8</name>
 
