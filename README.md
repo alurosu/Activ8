@@ -1,2 +1,3 @@
 # Activ8
- Android HTML game: Phonegap Build + Cordova
+
+[Download](https://play.google.com/store/apps/details?id=alurosu.games.activ8)
