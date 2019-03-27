@@ -114,10 +114,30 @@ audio {
 	left: 3%;
 	background: #fff;
 	border: 1px solid #ccc;
-	padding: 0 2em;
-	box-sizing: border-box;
-	overflow: auto;
+	display: flex;
+	flex-direction: column;
+}
+#helpWindow.hidden {
+	display: none;
 }
 #helpWindow img {
 	max-width: 60%;
+}
+#helpW {
+	height: 100%;
+	overflow: auto;
+	padding: 0 2em;
+}
+#helpW  p:first-child, #helpW  p:last-child {
+	margin: 0;
+}
+#helpC {
+	text-align: center;
+}
+#helpC button {
+	background: #1693A5;
+	margin: 0.83em 0;
+	padding: 10px;
+	color: #fff;
+	border: 1px solid #000;
 }

@@ -291,10 +291,10 @@ function onDeviceReady(){
 	});
 	
 	$("#help").on(clickHandler, function(e) {
-		$("#helpWindow").fadeIn();
+		$("#helpWindow").removeClass('hidden');
 	});
 	$("#helpWindow button").on(clickHandler, function(e) {
-		$("#helpWindow").fadeOut();
+		$("#helpWindow").addClass('hidden');
 	});
 	
 	window.plugins.playGamesServices.auth(function(){ isLogin = true; }, function(){alert("Can't connect to the internet. Your score will not be saved on our leaderboard.");});

@@ -13,7 +13,7 @@
   <script type="text/javascript" src="data/js/game.js"></script>
 </head>
 
-<body onload="onDeviceReady()">
+<body>
 	<canvas id="canvas">Your device does not support canvas.</canvas>
 	<div id="menu">
 		<div id="highscore">
@@ -32,22 +32,26 @@
 	<div id="volume">
 		<i class="fa fa-volume-up"></i>
 	</div>
-	<div id="helpWindow">
+	<div id="helpWindow" class="hidden">
 		<h2 style="text-align: center;">How to play?</h2>
-		<p>Tap anywhere on the screen to shoot balls. You start with 8. The game is over when you reach 0. Check the bottom left part of your screen to see how many you have.</p>
-		<p style="text-align: center;"><img src="data/img/balls.png" alt="balls" width="70" /></p>
-		<p>When a ball hits your target, it will change color. Every block has a numeric representation as well. You will know what color is next (I, II and III).</p>
-		<p style="text-align: center;"><img src="data/img/targets.png" alt="targets" /></p>
-		<p>The purpose of the game is to make all targets have the same color/number.</p>
-		<p>You get a point every time you do this. On each level the target move speed increases and you get more balls.</p>
-		<p style="text-align: center;"><img src="data/img/score.png" alt="score" width="70" /></p>
-		<p>Power ups will float on your screen. Shoot them. They will give you an extra ball or they will slow the target move speed.</p>
-		<p style="text-align: center;">
-			<img src="data/img/slowPU.png" alt="slowPU" height="40" />
-			<img src="data/img/extraPU.png" alt="extraPU" height="40" />
-		</p>
-		<p>Time and calculate your shots. </p>
-		<p style="text-align: center;"><button>Close</button></p>
+		<div id="helpW">
+			<p>Tap anywhere on the screen to shoot balls. You start with 8. The game is over when you reach 0. Check the bottom left part of your screen to see how many you have.</p>
+			<p style="text-align: center;"><img src="data/img/balls.png" alt="balls" width="70" /></p>
+			<p>When a ball hits your target, it will change color. Every block has a numeric representation as well. You will know what color is next (I, II and III).</p>
+			<p style="text-align: center;"><img src="data/img/targets.png" alt="targets" /></p>
+			<p>The purpose of the game is to make all targets have the same color/number.</p>
+			<p>You get a point every time you do this. On each level the target move speed increases and you get more balls.</p>
+			<p style="text-align: center;"><img src="data/img/score.png" alt="score" width="70" /></p>
+			<p>Power ups will float on your screen. Shoot them. They will give you an extra ball or they will slow the target move speed.</p>
+			<p style="text-align: center;">
+				<img src="data/img/slowPU.png" alt="slowPU" height="40" />
+				<img src="data/img/extraPU.png" alt="extraPU" height="40" />
+			</p>
+			<p>Time and calculate your shots. Score as many points as you can and rise to the top of the leaderboard. </p>
+		</div>
+		<div id="helpC">
+			<button>Close</button>
+		</div>
 	</div>
 </body>
 </html>
