@@ -106,4 +106,18 @@ audio {
 #volume i {
 	font-size: 3em;
 }
-	
+#helpWindow {
+	position: fixed;
+	width: 94%;
+	height: 94%;
+	top: 3%;
+	left: 3%;
+	background: #fff;
+	border: 1px solid #ccc;
+	padding: 0 2em;
+	box-sizing: border-box;
+	overflow: auto;
+}
+#helpWindow img {
+	max-width: 60%;
+}

@@ -290,6 +290,13 @@ function onDeviceReady(){
 		}
 	});
 	
+	$("#help").on(clickHandler, function(e) {
+		$("#helpWindow").fadeIn();
+	});
+	$("#helpWindow button").on(clickHandler, function(e) {
+		$("#helpWindow").fadeOut();
+	});
+	
 	window.plugins.playGamesServices.auth(function(){ isLogin = true; }, function(){alert("Can't connect to the internet. Your score will not be saved on our leaderboard.");});
 }
 
@@ -347,7 +354,7 @@ function draw() {
 			if (bulletsNumber == 8 && score == 0)
 				ctx.fillText("- tap to shoot -", cWidth/2, cHeight/2+cHeight/6+8);
 			else
-				ctx.fillText("- make them identical -", cWidth/2, cHeight/2+cHeight/6+8);
+				ctx.fillText("- make the targets identical -", cWidth/2, cHeight/2+cHeight/6+8);
 		}	else {
 			ctx.fillText("Speed: " + (score-slow).toString(), cWidth/2, cHeight/2+cHeight/6+8);
 		}
