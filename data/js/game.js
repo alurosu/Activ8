@@ -4,7 +4,7 @@ function powerUp(){
 	this.x = -50;
 	this.xSpeed = cWidth/5;
 	this.xDirection = 1;
-	this.y = 0;
+	this.y = -50;
 	this.width = cHeight/17;
 	this.height = cHeight/17;
 	this.cx = this.x + this.width*0.5;
@@ -190,10 +190,7 @@ var then;
 var appPaused = false;
 var countToAds = 5;
 
-function onDeviceReady(){
-	if (!localStorage.isSound)
-		localStorage.isSound = "on";
-	
+function onDeviceReady(){	
 	var gpurl = getPhoneGapPath();
 	if (typeof(Media) != 'undefined') {
 		hitSound = new Media(gpurl + 'data/audio/hit.mp3');
@@ -205,13 +202,13 @@ function onDeviceReady(){
 		snd = new Media(gpurl + "data/audio/background.mp3", onSuccess, onError, onStatus);
 		snd.setVolume('0.8');
 		
-		if (localStorage.sound == 'off') {
+		if (localStorage.isSound == 'off') {
 			//sound is off
 			$('#volume .fa').removeClass('fa-volume-up').addClass('fa-volume-off');
 			snd.stop();
 		} else {
 			//sound is on or default
-			localStorage.sound == 'on';
+			localStorage.isSound == 'on';
 			$('#volume .fa').removeClass('fa-volume-off').addClass('fa-volume-up');
 			snd.play();
 		}
@@ -364,7 +361,7 @@ function draw() {
 function drawBulletsCount() {
 	this.radius = cHeight/50;
 	ctx.beginPath();
-	ctx.arc(2*this.radius, cHeight-3*this.radius, this.radius, 0, 2*Math.PI);
+	ctx.arc(2*this.radius, cHeight-25-this.radius, this.radius, 0, 2*Math.PI);
 	ctx.fillStyle="#008000";
 	ctx.fill();
 	ctx.strokeStyle="#000";
@@ -376,7 +373,7 @@ function drawBulletsCount() {
 	ctx.font = 2*this.radius + "px Helvetica";
 	ctx.textAlign="left";
 	ctx.textBaseline="middle";
-	ctx.fillText(bulletsNumber + "/" + maxBullets, 3.5*this.radius, cHeight-3*this.radius+2);
+	ctx.fillText(bulletsNumber + "/" + maxBullets, 3.5*this.radius, cHeight-25-this.radius+2);
 }
 
 var firstBullet = -1;

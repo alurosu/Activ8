@@ -98,7 +98,7 @@ audio {
 }
 #volume {
 	position: fixed;
-    bottom: 1.2em;
+    bottom: 20px;
     right: 1em;
 	color: #008000;
 	text-shadow: 0 0 1px #000;
