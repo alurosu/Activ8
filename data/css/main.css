@@ -96,14 +96,14 @@ audio {
 	font-weight: normal;
     margin-top: 10px;
 }
-#isSound {
+#volume {
 	position: fixed;
     bottom: 1.2em;
     right: 1em;
 	color: #008000;
 	text-shadow: 0 0 1px #000;
 }
-#isSound i {
+#volume i {
 	font-size: 3em;
 }
 	

@@ -204,7 +204,15 @@ function onDeviceReady(){
 		
 		snd = new Media(gpurl + "data/audio/background.mp3", onSuccess, onError, onStatus);
 		snd.setVolume('0.8');
-		if (localStorage.isSound == "on") {
+		
+		if (localStorage.sound == 'off') {
+			//sound is off
+			$('#volume .fa').removeClass('fa-volume-up').addClass('fa-volume-off');
+			snd.stop();
+		} else {
+			//sound is on or default
+			localStorage.sound == 'on';
+			$('#volume .fa').removeClass('fa-volume-off').addClass('fa-volume-up');
 			snd.play();
 		}
 	}
@@ -225,7 +233,7 @@ function onDeviceReady(){
 			if (bullets.length>25)
 				bullets.shift();
 		}
-  });
+	});
 	
 	$("#canvas").parents("*").css("overflow", "visible");
 	
@@ -247,28 +255,42 @@ function onDeviceReady(){
 		$('#menu').fadeOut();
 	});
 	
+	$("#achievements").on(clickHandler, function(e) {
+		window.plugins.playGamesServices.showAchievements();
+	});
+	
 	$('#rate').on(clickHandler, function(e) {
 		openBrowser("market://details?id=alurosu.games.activ8");
 	});
 	
 	$('#share').on(clickHandler, function(e) {
-		navigator.share("My best score in Activ8 is " + localStorage.highscore + "! Can you beat me? :D http://bit.ly/activ8game","Activ8 score");
+		window.plugins.socialsharing.share("My best score in Activ8 is " + localStorage.highscore + "! Can you beat me? :D https://bit.ly/activ8game", null, null, 'https://bit.ly/activ8game');
 	});
 	
 	$("#leaderboard").on(clickHandler, function(e) {
-		if (isLogin) {
-			var dt = {
-				leaderboardId: "CgkI8eHDiO0fEAIQAA"
-			};
-			googleplaygame.showLeaderboard(dt);
+		var dt = {
+			leaderboardId: "CgkI8eHDiO0fEAIQAA"
+		};
+		window.plugins.playGamesServices.showLeaderboard(dt);
+	});
+	
+	$('#volume').on(clickHandler, function(e) {
+		if (typeof Media != 'undefined') {
+			if (localStorage.isSound == 'on') {
+				//sound goes off
+				localStorage.isSound = 'off';
+				$('#volume .fa').removeClass('fa-volume-up').addClass('fa-volume-off');
+				snd.pause();
+			} else {
+				//sound goes on
+				localStorage.isSound = 'on';
+				$('#volume .fa').removeClass('fa-volume-off').addClass('fa-volume-up');
+				snd.play();
+			}
 		}
 	});
 	
-	$('#fullAdsClose').on(clickHandler, function(e) {
-		$('#fullAds').fadeOut();
-	});
-	
-	googleplaygame.auth(function(){ isLogin = true; }, function(){alert("Can't connect to the internet. Your score will not be saved on our leaderboard.");});
+	window.plugins.playGamesServices.auth(function(){ isLogin = true; }, function(){alert("Can't connect to the internet. Your score will not be saved on our leaderboard.");});
 }
 
 function init() {
@@ -375,7 +397,7 @@ function update(modifier) {
 				var dt = {
 					achievementId: "CgkI8eHDiO0fEAIQBQ"
 				};
-				googleplaygame.unlockAchievement(dt);
+				window.plugins.playGamesServices.unlockAchievement(dt);
 				
 			}
 			PU.setX(-50);
@@ -439,7 +461,7 @@ function update(modifier) {
 						score: score,
 						leaderboardId: "CgkI8eHDiO0fEAIQAA"
 					};
-					googleplaygame.submitScore(dt);
+					window.plugins.playGamesServices.submitScore(dt);
 				}
 				if (countToAds == 1) {
 					//show ads
@@ -463,22 +485,22 @@ function update(modifier) {
 				var dt = {
 					achievementId: "CgkI8eHDiO0fEAIQAQ"
 				};
-				googleplaygame.unlockAchievement(dt);
+				window.plugins.playGamesServices.unlockAchievement(dt);
 			} else if (score == 10) {
 				var dt = {
 					achievementId: "CgkI8eHDiO0fEAIQAg"
 				};
-				googleplaygame.unlockAchievement(dt);
+				window.plugins.playGamesServices.unlockAchievement(dt);
 			} else if (score == 15) {
 				var dt = {
 					achievementId: "CgkI8eHDiO0fEAIQAw"
 				};
-				googleplaygame.unlockAchievement(dt);
+				window.plugins.playGamesServices.unlockAchievement(dt);
 			} else if (score == 20) {
 				var dt = {
 					achievementId: "CgkI8eHDiO0fEAIQBA"
 				};
-				googleplaygame.unlockAchievement(dt);
+				window.plugins.playGamesServices.unlockAchievement(dt);
 			}
 		}
 		
@@ -504,7 +526,8 @@ function update(modifier) {
 }
 
 function openBrowser(url){
-	navigator.app.loadUrl(url, {openExternal : true});
+	var iab = cordova.InAppBrowser;
+	iab.open(url, '_system');
 	return false;
 }
 
