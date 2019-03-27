@@ -21,7 +21,6 @@ audio {
 #menu {
 	position: fixed;
 	width: 80%;
-	margin-top: -30px;
 	top: 0;
 }
 #sound {
@@ -43,31 +42,44 @@ audio {
 	background: #1693A5;
 	margin-bottom: 10px;
 	cursor: pointer;
+    width: 96%;
+    margin: 0.5em auto;
 }
 #menu .secondMenu {
 	padding: 0;
 	border: 0;
+	display: flex;
+    flex-wrap: wrap;
 }
-#menu .secondMenu div{
+#menu .secondMenu div {
 	cursor: pointer;
-	width: 32%;
-	margin: 0;
+	width: 31%;
+	margin: 3px;
 	font-size: 30px;
-	float: left;
 	color: #000;
 	border-color: #ccc;
+	background: #fff;
+    padding: 10px 0px;
 }
 #menu #leaderboard {
-	float: none;
-	margin: 0px auto;
 	color: #1693A5;
 }
 #menu #share {
-	float: right;
 	color: #F02311;
+    margin-left: 3px;
+    margin-right: auto;
+}
+#menu #achievements {
+	color: #008000;
+    margin-left: auto;
+}
+#menu #help {
+    margin-right: auto;
 }
 #menu #rate {
 	color: #FBB829;
+    margin-left: auto;
+    margin-right: 3px;
 }
 #menu #highscore {
 	color: #000;
@@ -82,51 +94,16 @@ audio {
 	border: 0;
 	padding: 0;
 	font-weight: normal;
+    margin-top: 10px;
 }
-#botAds {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	text-align: center;
-	height: 50px;
-	overflow: hidden;
-	width: 100%;
-	-moz-user-select: none; 
-	-khtml-user-select: none; 
-	-webkit-user-select: none; 
-	-o-user-select: none; 
+#isSound {
+	position: fixed;
+    bottom: 1.2em;
+    right: 1em;
+	color: #008000;
+	text-shadow: 0 0 1px #000;
 }
-#fullAds {
-	width: 100%;
-	height: 100%;
-	z-index: 10;
-	position: absolute;
-	top: 0;
-	left: 0;
-	background: rgba(102,102,102,0.6);
-	text-align: center;
-	display: none;
-}
-#fullAdsClose {
-	z-index: 999;
-	position: absolute;
-	right: 0px;
-	top: 0px;
-	width: 90px;
-	height: 70px;
-}
-#fullAdsClose div {
-	color: white;
-	background: #008000;
-	font-weight: bold;
-	border-radius: 50%;
-	width: 20px;
-	height: 20px;
-	margin: 20px 30px;
-	text-align: center;
-	padding: 5px;
-	line-height: 20px;
-	border: 2px solid #000;
-	cursor: pointer;
+#isSound i {
+	font-size: 3em;
 }
 	

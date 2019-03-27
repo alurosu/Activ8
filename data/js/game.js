@@ -132,6 +132,7 @@ function bullet(x) {
 var targets = new Array();
 var targetsCount = 4;
 function target(value, x) {
+	this.description = "";
 	this.value = value;
 	this.speed = cWidth/(targetsCount*2);
 	this.width = cWidth/targetsCount;
@@ -143,18 +144,32 @@ function target(value, x) {
 		ctx.rect(this.x, this.y, this.width, this.height);
 		ctx.fillStyle="#fcfcfc";
 		
-		if (this.value==1)
+		if (this.value==1) {
+			this.description = "I";
 			ctx.fillStyle="#1693A5";
-		if (this.value==2)
-			ctx.fillStyle="#F02311";
-		if (this.value==3)
+		} else if (this.value==2) {
+			this.description = "II";
 			ctx.fillStyle="#FBB829";
+		} else if (this.value==3) {
+			this.description = "III";
+			ctx.fillStyle="#F02311";
+		}
 		
 		ctx.fill();
 		
 		ctx.strokeStyle="#000";
 		ctx.lineWidth = 1;
-		ctx.stroke();	
+		ctx.stroke();
+		
+		ctx.beginPath();
+		ctx.font = 0.2*this.height + "px Arial";
+		ctx.textAlign="center";
+		ctx.textBaseline="middle";
+		//ctx.strokeStyle = '#000';
+		//ctx.lineWidth = 2;
+		//ctx.strokeText(this.value, this.x+this.width*0.45, this.y+this.height*0.8);
+		ctx.fillStyle = "#ffffff";
+		ctx.fillText(this.description, this.x+this.width*0.5, this.y+this.height*0.8);
 	};
 }
 
@@ -172,18 +187,6 @@ var cHeight;  //canvas height
 var ctx; 		  //canvas context
 var canvas;
 var then;
-var soundImg;
-function soundImgF(){
-	this.image = new Image();
-	if (localStorage.isSound == "off")
-		this.image.src = "data/img/soundOff.png";
-		else
-		this.image.src = "data/img/soundOn.png";
-	this.x = 0;
-	this.y = 0;
-	this.width = 0;
-	this.height = 0;
-};
 var appPaused = false;
 var countToAds = 5;
 
@@ -192,16 +195,18 @@ function onDeviceReady(){
 		localStorage.isSound = "on";
 	
 	var gpurl = getPhoneGapPath();
-	hitSound = new Media(gpurl + 'data/audio/hit.mp3');
-	
-	scoreSound = new Media(gpurl + 'data/audio/score.mp3');
-	pu1Sound = new Media(gpurl + 'data/audio/pu1.mp3');
-	pu2Sound = new Media(gpurl + 'data/audio/pu2.mp3');
-	
-	snd = new Media(gpurl + "data/audio/background.mp3", onSuccess, onError, onStatus);
-	snd.setVolume('0.8');
-	if (localStorage.isSound == "on") {
-		snd.play();
+	if (typeof(Media) != 'undefined') {
+		hitSound = new Media(gpurl + 'data/audio/hit.mp3');
+		
+		scoreSound = new Media(gpurl + 'data/audio/score.mp3');
+		pu1Sound = new Media(gpurl + 'data/audio/pu1.mp3');
+		pu2Sound = new Media(gpurl + 'data/audio/pu2.mp3');
+		
+		snd = new Media(gpurl + "data/audio/background.mp3", onSuccess, onError, onStatus);
+		snd.setVolume('0.8');
+		if (localStorage.isSound == "on") {
+			snd.play();
+		}
 	}
 
 	if (!localStorage.highscore)
@@ -214,18 +219,7 @@ function onDeviceReady(){
 		var x = e.originalEvent.touches?e.originalEvent.touches[0].pageX:e.clientX;
 		var y = e.originalEvent.touches?e.originalEvent.touches[0].pageY:e.clientY;
 		
-		if (x>soundImg.x && x<soundImg.width+soundImg.x && y>soundImg.y && y<soundImg.height+soundImg.y) {
-			// sound image clicked
-			if (localStorage.isSound == "on") {
-				localStorage.isSound = "off";
-				snd.pause();
-				soundImg.image.src = "data/img/soundOff.png";
-			} else {
-				localStorage.isSound = "on";
-				snd.play();
-				soundImg.image.src = "data/img/soundOn.png";
-			}
-		} else if (bulletsNumber>0 && gameStarted) {
+		if (bulletsNumber>0 && gameStarted) {
 			bullets.push(new bullet(x));
 			bulletsNumber--;
 			if (bullets.length>25)
@@ -239,7 +233,7 @@ function onDeviceReady(){
 		if (!bulletsNumber) {
 			targets = new Array();
 			for (i=0; i<targetsCount+1; i++) {
-				targets.push(new target(i==targetsCount?3:1, i*cWidth/targetsCount));
+				targets.push(new target(i==targetsCount?2:1, i*cWidth/targetsCount));
 			}
 		}
 		bulletsNumber = 8;
@@ -280,14 +274,8 @@ function onDeviceReady(){
 function init() {
 	canvas = $("#canvas").get(0);
 	canvas.width = cWidth = $("body").width();
-	canvas.height = cHeight = $("body").height() - 50;
+	canvas.height = cHeight = $("body").height();
 	$('#canvas').height(cHeight);
-	console.log(cHeight);
-	
-	soundImg = new soundImgF();
-	soundImg.width = soundImg.height = 3*cHeight/50;
-	soundImg.x = cWidth - 4.5*cHeight/50;
-	soundImg.y = cHeight - 4.5*cHeight/50;
 	
 	$('#menu').css('top', $('body').height()/2-$('#menu').height()/2 + "px");
 	$('#menu').css('left', $('body').width()/2-$('#menu').width()/2 + "px");
@@ -299,7 +287,7 @@ function init() {
 	requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame || function(f){window.setTimeout(f,1000/60)};
 	
 	for (i=0; i<targetsCount+1; i++) {
-		targets.push(new target(i==targetsCount?3:1, i*cWidth/targetsCount));
+		targets.push(new target(i==targetsCount?2:1, i*cWidth/targetsCount));
 	}
 	bulletsNumber = 8;
 	
@@ -360,8 +348,6 @@ function drawBulletsCount() {
 	ctx.textAlign="left";
 	ctx.textBaseline="middle";
 	ctx.fillText(bulletsNumber + "/" + maxBullets, 3.5*this.radius, cHeight-3*this.radius+2);
-	
-	ctx.drawImage(soundImg.image, soundImg.x, soundImg.y, soundImg.width, soundImg.height);
 }
 
 var firstBullet = -1;
@@ -396,17 +382,19 @@ function update(modifier) {
 			if (PU.type == 1) {
 				//reload
 				maxBullets++;
-				if (localStorage.isSound == "on") {
-					pu1Sound.stop();
-					pu1Sound.play();
-				}
+				if (typeof(Media) != 'undefined')
+					if (localStorage.isSound == "on") {
+						pu1Sound.stop();
+						pu1Sound.play();
+					}
 			} else {
 				//slow
 				slow++;
-				if (localStorage.isSound == "on") {
-					pu2Sound.stop();
-					pu2Sound.play();
-				}
+				if (typeof(Media) != 'undefined')
+					if (localStorage.isSound == "on") {
+						pu2Sound.stop();
+						pu2Sound.play();
+					}
 			}
 		}
 	}
@@ -416,10 +404,11 @@ function update(modifier) {
 		if (firstBullet != -1 && 
 				bullets[firstBullet].x < targets[i].width+targets[i].x && 
 				targets[i].x < bullets[firstBullet].x) {
-			if (localStorage.isSound == "on") {
-				hitSound.stop();
-				hitSound.play();
-			}
+			if (typeof(Media) != 'undefined')
+				if (localStorage.isSound == "on") {
+					hitSound.stop();
+					hitSound.play();
+				}
 
 			if (targets[i].value == 3)
 				targets[i].value = 1;
@@ -504,10 +493,11 @@ function update(modifier) {
 		}
 		direction *= -1;
 		
-		if (localStorage.isSound == "on") {
-			scoreSound.stop();
-			scoreSound.play();
-		}
+		if (typeof(Media) != 'undefined')
+			if (localStorage.isSound == "on") {
+				scoreSound.stop();
+				scoreSound.play();
+			}
 	}
 	
 	PU.draw(modifier);
@@ -529,8 +519,9 @@ document.addEventListener("resume", onResume, false);
 function onResume() {
 	appPaused = false;
 	// Handle the resume event
-	if (localStorage.isSound == "on")
-		snd.play();
+	if (typeof(Media) != 'undefined')
+		if (localStorage.isSound == "on")
+			snd.play();
 	
 	$('#highscore > span').html('Score: ' + score);
 	$('#menu').fadeIn();
@@ -547,9 +538,9 @@ function onResume() {
 document.addEventListener("deviceready", onDeviceReady, false);
 
 var getPhoneGapPath = function() {
-		var path = window.location.pathname;
-		path = path.substr( path, path.length - 10 );
-		return path;
+	var path = window.location.pathname;
+	path = path.substr( path, path.length - 10 );
+	return path;
 };
 
 var snd = null;
@@ -566,9 +557,9 @@ function onError(error) {
 }
 // onStatus Callback 
 function onStatus(status) {
-		if( status==Media.MEDIA_STOPPED ) {
-				snd.play();
-		}
+	if( status==Media.MEDIA_STOPPED ) {
+		snd.play();
+	}
 }
 
 function setPU() {

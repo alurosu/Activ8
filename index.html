@@ -13,19 +13,24 @@
   <script type="text/javascript" src="data/js/game.js"></script>
 </head>
 
-<body>
+<body onload="onDeviceReady()">
 	<canvas id="canvas">Your device does not support canvas.</canvas>
 	<div id="menu">
 		<div id="highscore">
-			<span></span>
+			<span>Score: 0</span>
 			<div id="bestOf">Best: --</div>
 		</div>
-	<div id="start">New Game</div>
+		<div id="start">New Game</div>
 		<div class="secondMenu">
-			<div id="share"><i class="fa fa-share-alt"></i></div>
-			<div id="rate"><i class="fa fa-star"></i></div>
+			<div id="achievements"><i class="fa fa-check"></i></div>
 			<div id="leaderboard"><i class="fa fa-trophy"></i></div>
+			<div id="help"><i class="fa fa-question"></i></div>
+			<div id="rate"><i class="fa fa-star"></i></div>
+			<div id="share"><i class="fa fa-share-alt"></i></div>
 		</div>
+	</div>
+	<div id="isSound">
+		<i class="fa fa-volume-up"></i>
 	</div>
 </body>
 </html>
