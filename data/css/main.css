@@ -76,9 +76,11 @@ audio {
 #menu #help {
     margin-right: auto;
 }
+#menu #donate {
+    margin-left: auto;
+}
 #menu #rate {
 	color: #FBB829;
-    margin-left: auto;
     margin-right: 3px;
 }
 #menu #highscore {
@@ -97,11 +99,14 @@ audio {
     margin-top: 10px;
 }
 #volume {
-	position: fixed;
-    bottom: 20px;
-    right: 1em;
-	color: #008000;
-	text-shadow: 0 0 1px #000;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    color: #008000;
+    text-shadow: 0 0 1px #000;
+    width: 3em;
+    padding: 1em 1em 20px 1em;
+	z-index: 99;
 }
 #volume i {
 	font-size: 3em;
@@ -136,7 +141,7 @@ audio {
 }
 #helpC button {
 	background: #1693A5;
-	margin: 0.83em 0;
+	margin: 0.83em;
 	padding: 10px;
 	color: #fff;
 	border: 1px solid #000;

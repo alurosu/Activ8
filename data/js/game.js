@@ -4,7 +4,7 @@ function powerUp(){
 	this.x = -50;
 	this.xSpeed = cWidth/5;
 	this.xDirection = 1;
-	this.y = -50;
+	this.y = cHeight+100;
 	this.width = cHeight/17;
 	this.height = cHeight/17;
 	this.cx = this.x + this.width*0.5;
@@ -260,6 +260,10 @@ function onDeviceReady(){
 		openBrowser("market://details?id=alurosu.games.activ8");
 	});
 	
+	$('#donation').on(clickHandler, function(e) {
+		openBrowser("https://alurosu.com/donate");
+	});
+	
 	$('#share').on(clickHandler, function(e) {
 		window.plugins.socialsharing.share("My best score in Activ8 is " + localStorage.highscore + "! Can you beat me? :D https://bit.ly/activ8game", null, null, 'https://bit.ly/activ8game');
 	});
@@ -404,7 +408,7 @@ function update(modifier) {
 				window.plugins.playGamesServices.unlockAchievement(dt);
 				
 			}
-			PU.setX(-50);
+			PU.setY(cHeight+100);
 			if (PU.type == 1) {
 				//reload
 				maxBullets++;
