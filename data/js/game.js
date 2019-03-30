@@ -260,7 +260,7 @@ function onDeviceReady(){
 		openBrowser("market://details?id=alurosu.games.activ8");
 	});
 	
-	$('#credits').on(clickHandler, function(e) {
+	$('#credits span').on(clickHandler, function(e) {
 		openBrowser("https://alurosu.com");
 	});
 	
