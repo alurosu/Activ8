@@ -257,11 +257,11 @@ function onDeviceReady(){
 	});
 	
 	$('#rate').on(clickHandler, function(e) {
-		openBrowser("https://alurosu.com");
+		openBrowser("market://details?id=alurosu.games.activ8");
 	});
 	
 	$('#credits').on(clickHandler, function(e) {
-		openBrowser("market://details?id=alurosu.games.activ8");
+		openBrowser("https://alurosu.com");
 	});
 	
 	$('#share').on(clickHandler, function(e) {
