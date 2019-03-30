@@ -257,6 +257,10 @@ function onDeviceReady(){
 	});
 	
 	$('#rate').on(clickHandler, function(e) {
+		openBrowser("https://alurosu.com");
+	});
+	
+	$('#credits').on(clickHandler, function(e) {
 		openBrowser("market://details?id=alurosu.games.activ8");
 	});
 	

@@ -102,7 +102,6 @@ audio {
     right: 0;
     color: #008000;
     text-shadow: 0 0 1px #000;
-    width: 3em;
     padding: 1em 1em 20px 1em;
 	z-index: 99;
 }
@@ -119,6 +118,7 @@ audio {
 	border: 1px solid #ccc;
 	display: flex;
 	flex-direction: column;
+	z-index: 999;
 }
 #helpWindow.hidden {
 	display: none;
@@ -143,4 +143,21 @@ audio {
 	padding: 10px;
 	color: #fff;
 	border: 1px solid #000;
+}
+#menu #credits {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+    font-family: Arial;
+    padding: .5em;
+	border: 0;
+	color: #000;
+	font-weight: normal;
+	font-size: 1em;
+}
+#credits span {
+	color: #1693A5;
+	font-weight: bold;
 }
