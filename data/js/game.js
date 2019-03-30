@@ -260,10 +260,6 @@ function onDeviceReady(){
 		openBrowser("market://details?id=alurosu.games.activ8");
 	});
 	
-	$('#donate').on(clickHandler, function(e) {
-		openBrowser("https://alurosu.com/donate");
-	});
-	
 	$('#share').on(clickHandler, function(e) {
 		window.plugins.socialsharing.share("My best score in Activ8 is " + localStorage.highscore + "! Can you beat me? :D https://bit.ly/activ8game", null, null, 'https://bit.ly/activ8game');
 	});

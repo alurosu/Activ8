@@ -76,12 +76,10 @@ audio {
 #menu #help {
     margin-right: auto;
 }
-#menu #donate {
-    margin-left: auto;
-}
 #menu #rate {
 	color: #FBB829;
     margin-right: 3px;
+    margin-left: auto;
 }
 #menu #highscore {
 	color: #000;
